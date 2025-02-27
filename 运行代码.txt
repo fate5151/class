@@ -1,0 +1,39 @@
+usage: demo_inference.py [-h] --cfg CFG --checkpoint CHECKPOINT [--sp] [--detector DETECTOR] [--detfile DETFILE]
+                         [--indir INPUTPATH] [--list INPUTLIST] [--image INPUTIMG] [--outdir OUTPUTPATH] [--save_img]
+                         [--vis] [--showbox] [--profile] [--format FORMAT] [--min_box_area MIN_BOX_AREA]
+                         [--detbatch DETBATCH] [--posebatch POSEBATCH] [--eval] [--gpus GPUS] [--qsize QSIZE] [--flip]
+                         [--debug] [--video VIDEO] [--webcam WEBCAM] [--save_video] [--vis_fast] [--pose_flow]
+                         [--pose_track]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- image
+(136个关节点)：
+python scripts/demo_inference.py  --cfg configs/halpe_coco_wholebody_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml   --checkpoint pretrained_models/multi_domain_fast50_regression_256x192.pth   --detector yolo  --indir examples/demo/ --outdir outputs/1/   --save_img  --gpus 0
+
+(17个关节点)：
+python scripts/demo_inference.py  --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x-simple.yaml   --checkpoint pretrained_models\simple_res50_256x192.pth   --detector yolo  --indir examples/demo/ --outdir outputs/1/   --save_img  --gpus 0
+********************************************************************************************************************************************************************
+- video
+python scripts/demo_inference.py --cfg configs/halpe_coco_wholebody_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml   --checkpoint pretrained_models/multi_domain_fast50_regression_256x192.pth --video examples\video\1.mp4 --outdir outputs/3/ --save_video --gpus 0
+
+(17个关节点)：
+python scripts/demo_inference.py  --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x-simple.yaml   --checkpoint pretrained_models\simple_res50_256x192.pth --video examples\video\2.mp4 --outdir outputs/3/ --save_video --gpus 0 --pose_flow --pose_track
+********************************************************************************************************************************************************************
+- camera
+python scripts/demo_inference.py --cfg configs/halpe_coco_wholebody_136/resnet/256x192_res50_lr1e-3_2x-regression.yaml   --checkpoint pretrained_models/multi_domain_fast50_regression_256x192.pth --outdir outputs/camera/ --vis_fast --webcam 0 --save_video   --gpus 0  --detector yolo
+
+(17个关节点)：
+python scripts/demo_inference.py  --cfg configs/coco/resnet/256x192_res50_lr1e-3_1x-simple.yaml   --checkpoint pretrained_models\simple_res50_256x192.pth    --detector yolo --outdir outputs/camera/ --vis --webcam 0 --save_video   --gpus 0  
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.bilibili.com/video/BV1994y1y7ww/?spm_id_from=333.337.search-card.all.click&vd_source=47aa002bdf45b11e01d34c441566f327
+几条测试命令给大家：
+- camera
+python scripts/demo_inference.py --cfg configs/halpe_26/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint pretrained_models/halpe26_fast_res50_256x192.pth --outdir examples/res --vis --webcam 0 --save_video
+- video
+python scripts/demo_inference.py --cfg configs/halpe_26/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint pretrained_models/halpe26_fast_res50_256x192.pth --video
+examples/demo/demo.mp4 --outdir examples/res --save_video
+- image
+python scripts/demo_inference.py --cfg configs/halpe_26/resnet/256x192_res50_lr1e-3_1x.yaml --checkpoint pretrained_models/halpe26_fast_res50_256x192.pth --indir examples/demo/ --save_img
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
